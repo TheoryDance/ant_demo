@@ -1,0 +1,52 @@
+<?xml version = "1.0"?>
+<project name = "ant_demo" basedir = "." default = "jar">
+	
+	<property name="lib.dir" value="lib" />
+	<property name="classes.dir" value="build/classes" />
+	
+	<!-- 程序编译的时候需要 -->
+	<path id="master-classpath">
+		<fileset file="${lib.dir}/*.jar"></fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+	
+	<target name="compile" depends="clean">
+		<mkdir dir="${classes.dir}" />
+		
+		<!-- 进行编译class文件，debug设置后，在运行输出的时候才能输出日志行数信息 -->
+		<javac srcdir="src" destdir="${classes.dir}" includeantruntime="false" debug="true">
+			<classpath refid="master-classpath" />
+		</javac>
+		
+		<!-- 将一些properties和xml文件拷贝到classes文件夹下 -->
+		<copy todir="${classes.dir}">
+			<fileset dir="src">
+				<include name="**/*.xml"/>
+			</fileset>
+			<fileset dir="config">
+				<include name="**/*.properties"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+		
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar destfile="build/ant_demo.jar" basedir="${classes.dir}" excludes="META-INF/*.SF">
+			<manifest>
+				<attribute name="Main-class" value="com.Luncher"/>
+			</manifest>
+			<zipfileset src="${lib.dir}/commons-beanutils-1.8.3.jar" />
+			<zipfileset src="${lib.dir}/commons-digester-1.7.jar" />
+			<zipfileset src="${lib.dir}/commons-logging-1.1.1.jar" />
+			<zipfileset src="${lib.dir}/jta-1.1.jar" />
+			<zipfileset src="${lib.dir}/log4j-1.2.15.jar" />
+			<zipfileset src="${lib.dir}/mybatis-3.2.8.jar" />
+			<zipfileset src="${lib.dir}/mysql-connector-java-commercial-5.1.14-bin.jar" />
+			<zipfileset src="${lib.dir}/quartz-all-1.7.3.jar" />
+		</jar>
+	</target>
+</project>

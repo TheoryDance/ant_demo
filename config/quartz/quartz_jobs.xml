@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<quartz xmlns="http://www.opensymphony.com/quartz/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.opensymphony.com/quartz/JobSchedulingData  
+  http://www.opensymphony.com/quartz/xml/job_scheduling_data_1_5.xsd"
+	version="2.0.2">
+	
+	<job>
+		<job-detail>
+			<name>DemoTask</name>
+			<description></description>
+			<group>Server</group>
+			<job-class>com.task.DemoTask</job-class>
+			<job-data-map allows-transient-data="true" />
+		</job-detail>
+		<trigger>
+			<cron>
+				<name>DemoTaskTriger</name>
+				<group>Server</group>
+				<job-name>DemoTask</job-name>
+				<job-group>Server</job-group>
+				<cron-expression>10/30 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+	
+</quartz>  
