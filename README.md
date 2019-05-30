@@ -1,0 +1,3 @@
+# ant_demo
+里面使用了mybatis和quartz进行测试ant打包是否可以正常执行任务和连接数据库
+主要是学习ant构建的build.xml编写
